@@ -1,0 +1,42 @@
+#!/usr/bin/env julia
+## -*- julia -*-
+
+## train-ubm.  The umptieth time I write a script for UBM trianing. 
+## This time using Julia, and the tools in GMMs. 
+
+## temporary hack
+
+using GaussianMixtures
+using JLD
+using MFCC
+using ClusterManagers
+
+pre = joinpath("data", "fea")
+ext = "mfcc"
+
+if length(ARGS) < 2
+   error("Usage: train-ubm train-list output.ubm")
+end
+
+listfile = ARGS[1]
+outfile = ARGS[2]
+files = readdlm(listfile, ASCIIString)[:,15] # 15th col is PRISM key
+
+x = Data(map(x->joinpath(pre,"$x.$ext"), files), Float64, load=feaload, size=feasize)
+
+    addprocs_sge(100)
+
+    @everywhere using GaussianMixtures
+    @everywhere using MFCC
+    @everywhere setmem(0.1)     # default 2.0G is a bit expensive
+    
+## from here on: main()
+if !isinteractive()
+
+    println("Ready to start training a UBM")
+    g = GMM(1024, x; method=:kmeans)
+    JLD.save(outfile, "ubm", g)
+
+    rmprocs(workers())
+end
+
