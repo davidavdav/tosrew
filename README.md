@@ -1,4 +1,7 @@
-# Exampes / LOG file for how to use Julia speaker rec tools at the BUT cluster
+# tosrew
+Some of my experiments during the Torino SRE Workshop 2015
+
+## Exampes / LOG file for how to use Julia speaker rec tools at the BUT cluster
 
 ## Principles
 
