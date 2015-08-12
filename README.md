@@ -13,15 +13,15 @@ Some of my experiments during the Torino SRE Workshop 2015
 
 ### For instance
 
+| link    | dest    |
 |---------|---------|
 | lists   | /mnt/matylda5/iplchot/SRE/BEST2011/lists.110718 |
 | sad     | /mnt/matylda4/glembek/BEST2011/tasks/Segmentation_Franta_V4/SubtractedAndNice4Paja/data/lab |
 | data    | /homes/eva/q/qleuween/data/sid |
-|---------|---------|
 
 ## Feature extraction
 
-Not more than necessary at the same time.  Use `qsub` parallelization
+Only carry out the featue extraction that we need now.  Use `qsub` parallelization
 directly, using Julia to sample filelist depending on SGE array
 number.  We could also have done this differently, e.g., using Julia
 parallelization.
